@@ -1,0 +1,110 @@
+/* Стили для кнопок */
+
+.body {
+    max-width: 1000px;
+    margin: 20px auto;
+}
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 15px;
+    background-color: #3498db;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: #2980b9;
+}
+
+/* Стили для таблицы или формы */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    border: 1px solid #ccc;
+    padding: 8px;
+}
+
+.table th {
+    background-color: #f2f2f2;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.form input[type="text"],
+.form input[type="email"],
+.form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form input[type="submit"] {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.form input[type="submit"]:hover {
+    background-color: #2980b9;
+}
+
+.form label {
+    font-weight: bold;
+}
+
+.form .error {
+    color: red;
+}
+
+
+input[type="date"] {
+    appearance: none;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    color: #3498db;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-inner-spin-button {
+    display: none;
+}
+
+input[type="date"]::-webkit-clear-button {
+    display: none;
+}
+
+img {
+    max-width: 100px; /* Максимальная ширина картинки */
+    max-height: 100px; /* Максимальная высота картинки */
+    display: block;
+    margin: 0 auto; /* Центрирование картинки */
+}
+.delete {
+    margin: 15px;
+}
