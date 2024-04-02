@@ -35,12 +35,12 @@ include 'connect.php';
             <option value="none"><?php echo $group_filter_value; ?></option>
             <?php
             include 'connect.php';
-            $sql_groups = "SELECT DISTINCT kind FROM Kinds_service";
+            $sql_groups = "SELECT DISTINCT kind_name FROM kinds_service";
             $result_groups = $conn->query($sql_groups);
             $filter_str = $_GET['group_filter'];
             while ($row = $result_groups->fetch_assoc()) {
-                if ($group_filter_value != $row['kind'])
-                    echo '<option value="' . $row['kind'] . '" ' /*. $selected*/ . '>' . $row['kind'] . '</option>';
+                if ($group_filter_value != $row['kind_name'])
+                    echo '<option value="' . $row['kind_name'] . '" ' /*. $selected*/ . '>' . $row['kind_name'] . '</option>';
             }
             $isFiltered = $_GET['group_filter'] == "none" ? false : true;
             ?>
@@ -50,14 +50,14 @@ include 'connect.php';
 
 <?php
 $sort_column = isset($_GET['column_sort']) ? $_GET['column_sort'] : "id_service";
-$filter = isset($_GET['group_filter']) ? " WHERE Kinds_service.kind = '" . $_GET['group_filter'] . "'" : "";
+$filter = isset($_GET['group_filter']) ? " WHERE kinds_service.kind_name = '" . $_GET['group_filter'] . "'" : "";
 if (!$isFiltered)
     $filter = '';
-$filter2 = isset($_GET['group_filter']) ? " WHERE Kinds_service.kind = '" . $_GET['group_filter'] . "'" : "";
-$service = "SELECT Service.id_service, Service.comment, Types_service.type_name, Kinds_service.kind
-            FROM Service  
-            JOIN Types_service ON Service.type = Types_service.id_type
-            JOIN Kinds_service ON Service.id_kind = Kinds_service.id_kind
+$filter2 = isset($_GET['group_filter']) ? " WHERE kinds_service.kind_name = '" . $_GET['group_filter'] . "'" : "";
+$service = "SELECT services.id_service, services.comment, types_service.type_name, kinds_service.kind_name
+            FROM services  
+            JOIN types_service ON services.type = types_service.id_type
+            JOIN kinds_service ON services.kind = kinds_service.id_kind
             $filter
             ORDER BY $sort_column";
 $result = $conn->query($service);
@@ -72,7 +72,7 @@ $result = $conn->query($service);
                 <th>Вид услуги</th><th>Фото</th>";
         while ($row = $result->fetch_assoc()) {
             echo "<tr><td>".$row['id_service']."</td><td>".$row['comment']."</td>
-            <td>".$row['type_name']."</td><td>".$row['kind']."</td>
+            <td>".$row['type_name']."</td><td>".$row['kind_name']."</td>
             <td><img src='https://s14.stc.all.kpcdn.net/woman/wp-content/uploads/2022/06/s-vysokoj-posadkoj-massimodutti.com_.jpeg'/></td>";
         }
         echo "</table>";

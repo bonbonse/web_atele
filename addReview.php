@@ -1,5 +1,6 @@
 <?php
 include 'connect.php';
+date_default_timezone_set('UTC');
 ?>
 
 <!DOCTYPE html>
@@ -20,9 +21,9 @@ include 'connect.php';
 <h2>Отзывы:</h2>
 <?php
 
-$sql_alb = "SELECT Review.id_review, Review.message, users.surname
-                FROM Review
-                JOIN users ON Review.user = users.id_user";
+$sql_alb = "SELECT reviews.id_review, reviews.message, users.surname
+                FROM reviews
+                JOIN users ON reviews.user = users.id_user";
 $res_alb = $conn->query($sql_alb);
 
 if ($res_alb->num_rows > 0) {
@@ -44,13 +45,11 @@ if ($res_alb->num_rows > 0) {
 <div id="добавление">
     <h2>Оставить отзыв</h2>
     <?php
-    $sql_groups = "SELECT * FROM Review";
+    $sql_groups = "SELECT * FROM Reviews";
     $result_groups = $conn->query($sql_groups);
 
-    echo "<form class='form' method='post' action='submit.php'>
-        Код: <input type='text' name='id_review'><br>
+    echo "<form class='form' method='post' action='addReview.php'>
         Отзыв: <input type='text' name='message'><br>
-        Дата: <input type='date' name='dateO'><br>
         Пользователь: <select name='user'><br>";
         while ($row = $result_groups->fetch_assoc()) {
             echo "<option value='" . $row['user'] . "'>" . $row['user'] . "</option>";
@@ -64,12 +63,11 @@ if ($res_alb->num_rows > 0) {
     <?php
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $id_review = $_POST['id_review'];
         $message = $_POST['message'];
-        $date = $_POST['date'];
+        $date = date("m.d.y");
         $user = $_POST['user'];
 
-        $sql = "INSERT INTO Review (id_review, message, dateO, user) VALUES ('$id_review', '$message', '$date', '$user')";
+        $sql = "INSERT INTO Reviews (message, date_review, user) VALUES ('$message', '$date', '$user')";
         echo $sql;
         if ($conn->query($sql) === TRUE) {
             echo "Добавлено";
