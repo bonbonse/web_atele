@@ -21,15 +21,15 @@ date_default_timezone_set('UTC');
 <h2>Отзывы:</h2>
 <?php
 
-$sql_alb = "SELECT reviews.id_review, reviews.message, users.surname
+$sql_str = "SELECT reviews.id_review, reviews.message, users.surname
                 FROM reviews
                 JOIN users ON reviews.user = users.id_user";
-$res_alb = $conn->query($sql_alb);
+$res = $conn->query($sql_str);
 
-if ($res_alb->num_rows > 0) {
+if ($res->num_rows > 0) {
     echo "<table class='table'>";
     echo "<tr><th>Код отзыва</th><th>Отзыв</th><th>Код пользователя</th></tr>";
-    while ($row = $res_alb->fetch_assoc()) {
+    while ($row = $res->fetch_assoc()) {
         echo "<tr>";
         echo "<td>" . $row['id_review'] . "</td>";
         echo "<td>" . $row['message'] . "</td>";
@@ -45,13 +45,13 @@ if ($res_alb->num_rows > 0) {
 <div id="добавление">
     <h2>Оставить отзыв</h2>
     <?php
-    $sql_groups = "SELECT * FROM Reviews";
-    $result_groups = $conn->query($sql_groups);
+    $sql_str = "SELECT * FROM Reviews";
+    $res = $conn->query($sql_str);
 
     echo "<form class='form' method='post' action='addReview.php'>
         Отзыв: <input type='text' name='message'><br>
         Пользователь: <select name='user'><br>";
-        while ($row = $result_groups->fetch_assoc()) {
+        while ($row = $res->fetch_assoc()) {
             echo "<option value='" . $row['user'] . "'>" . $row['user'] . "</option>";
         }
         echo "</select></td></tr>
@@ -64,7 +64,7 @@ if ($res_alb->num_rows > 0) {
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = $_POST['message'];
-        $date = date("m.d.y");
+        $date = date("d.m.y");
         $user = $_POST['user'];
 
         $sql = "INSERT INTO Reviews (message, date_review, user) VALUES ('$message', '$date', '$user')";
