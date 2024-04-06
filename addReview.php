@@ -1,5 +1,8 @@
 <?php
 include 'connect.php';
+require 'Door/authSessionCheck.php';
+
+
 date_default_timezone_set('UTC');
 ?>
 
@@ -17,7 +20,7 @@ date_default_timezone_set('UTC');
 <button class="button" onclick="window.location.href='addReview.php'">Акции</button>
 <button class="button" onclick="window.location.href='addReview.php'">Ткани</button>
 <button class="button" onclick="window.location.href='addReview.php'">Подарки</button>
-<h2>Оставить отзыв</h2>
+<?php echo "<form method='post' action='Door/logout.php'><button class='button' type='submit'>Выйти</button></form>" ?>
 <h2>Отзывы:</h2>
 <?php
 
@@ -26,6 +29,10 @@ $sql_str = "SELECT reviews.id_review, reviews.message, users.surname
                 JOIN users ON reviews.user = users.id_user";
 $res = $conn->query($sql_str);
 
+function delete_review(){
+    echo "hi";
+}
+
 if ($res->num_rows > 0) {
     echo "<table class='table'>";
     echo "<tr><th>Код отзыва</th><th>Отзыв</th><th>Код пользователя</th></tr>";
@@ -33,7 +40,7 @@ if ($res->num_rows > 0) {
         echo "<tr>";
         echo "<td>" . $row['id_review'] . "</td>";
         echo "<td>" . $row['message'] . "</td>";
-        echo "<td>" . $row['surname'] . "<input type='submit' value='delete' class='delete'>" . "</td>";
+        echo "<td>" . $row['surname'] . "<input type='submit' value='delete' class='delete' >" . "</td>";
         echo "</tr>";
     }
     echo "</table>";
@@ -45,14 +52,15 @@ if ($res->num_rows > 0) {
 <div id="добавление">
     <h2>Оставить отзыв</h2>
     <?php
-    $sql_str = "SELECT * FROM Reviews";
+    //$sql_str = "SELECT Reviews.user FROM Reviews";
+    $sql_str = "SELECT id_user, surname FROM users";
     $res = $conn->query($sql_str);
 
     echo "<form class='form' method='post' action='addReview.php'>
         Отзыв: <input type='text' name='message'><br>
         Пользователь: <select name='user'><br>";
         while ($row = $res->fetch_assoc()) {
-            echo "<option value='" . $row['user'] . "'>" . $row['user'] . "</option>";
+            echo "<option value='" . $row['id_user'] . "'>".$row['surname'] . "</option>";
         }
         echo "</select></td></tr>
     <input type='submit' value='Отправить'>
@@ -66,8 +74,9 @@ if ($res->num_rows > 0) {
         $message = $_POST['message'];
         $date = date("d.m.y");
         $user = $_POST['user'];
+        $user_order = 1;
 
-        $sql = "INSERT INTO Reviews (message, date_review, user) VALUES ('$message', '$date', '$user')";
+        $sql = "INSERT INTO Reviews (message, date_review, user, order_r) VALUES ('$message', '$date', '$user', '$user_order')";
         echo $sql;
         if ($conn->query($sql) === TRUE) {
             echo "Добавлено";
@@ -80,6 +89,7 @@ if ($res->num_rows > 0) {
     ?>
 
 </div>
+
 </body>
 </html>
 

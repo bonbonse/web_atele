@@ -1,5 +1,6 @@
 <?php
 include 'connect.php';
+require 'Door/authSessionCheck.php';
 ?>
 
 <!DOCTYPE html>
@@ -16,6 +17,7 @@ include 'connect.php';
 <button class="button" onclick="window.location.href='addReview.php'">Акции</button>
 <button class="button" onclick="window.location.href='addReview.php'">Ткани</button>
 <button class="button" onclick="window.location.href='addReview.php'">Подарки</button>
+<?php echo "<form method='post' action='Door/logout.php'><button class='button' type='submit'>Выйти</button></form>" ?>
 
 <form method="get" class="form">
     <label for="column_sort">Сортировать по:</label>
@@ -35,7 +37,7 @@ include 'connect.php';
             <option value="none"><?php echo $group_filter_value; ?></option>
             <?php
             include 'connect.php';
-            $sql_groups = "SELECT DISTINCT kind_name FROM kinds_service";
+            $sql_groups = "SELECT DISTINCT kind_name FROM kinds";
             $result_groups = $conn->query($sql_groups);
             $filter_str = $_GET['group_filter'];
             while ($row = $result_groups->fetch_assoc()) {
@@ -50,14 +52,14 @@ include 'connect.php';
 
 <?php
 $sort_column = isset($_GET['column_sort']) ? $_GET['column_sort'] : "id_service";
-$filter = isset($_GET['group_filter']) ? " WHERE kinds_service.kind_name = '" . $_GET['group_filter'] . "'" : "";
+$filter = isset($_GET['group_filter']) ? " WHERE kinds.kind_name = '" . $_GET['group_filter'] . "'" : "";
 if (!$isFiltered)
     $filter = '';
-$filter2 = isset($_GET['group_filter']) ? " WHERE kinds_service.kind_name = '" . $_GET['group_filter'] . "'" : "";
-$service = "SELECT services.id_service, services.comment, types_service.type_name, kinds_service.kind_name
+$filter2 = isset($_GET['group_filter']) ? " WHERE kinds.kind_name = '" . $_GET['group_filter'] . "'" : "";
+$service = "SELECT services.id_service, services.info, types.type_name, kinds.kind_name
             FROM services  
-            JOIN types_service ON services.type = types_service.id_type
-            JOIN kinds_service ON services.kind = kinds_service.id_kind
+            JOIN types ON services.type = types.id_type
+            JOIN kinds ON services.kind = kinds.id_kind
             $filter
             ORDER BY $sort_column";
 $result = $conn->query($service);
@@ -71,7 +73,7 @@ $result = $conn->query($service);
         echo "<tr><th>Код Услуги</th><th>Дополнительная информация</th><th>Тип услуги</th>
                 <th>Вид услуги</th><th>Фото</th>";
         while ($row = $result->fetch_assoc()) {
-            echo "<tr><td>".$row['id_service']."</td><td>".$row['comment']."</td>
+            echo "<tr><td>".$row['id_service']."</td><td>".$row['info']."</td>
             <td>".$row['type_name']."</td><td>".$row['kind_name']."</td>
             <td><img src='https://s14.stc.all.kpcdn.net/woman/wp-content/uploads/2022/06/s-vysokoj-posadkoj-massimodutti.com_.jpeg'/></td>";
         }

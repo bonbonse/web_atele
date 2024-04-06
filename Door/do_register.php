@@ -1,9 +1,12 @@
 <?php
 
-$login = $_GET['login'];
+$login = $_GET['username'];
 $password = $_GET['password'];
 
-$sql_str = "SELECT DISTINCT login, password FROM users WHERE users.login = $login AND users.password = $password";
+echo $login;
+echo $password;
+
+$sql_str = "SELECT login, password FROM users WHERE users.login = $login AND users.password = $password";
 $result = $conn->query($sql_str);
 
 if (isset($result)){
