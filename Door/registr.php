@@ -3,6 +3,9 @@ session_start();
 
 require '../connect.php';
 
+if (isset($_SESSION['username']))
+    header("Location: ../index.php");
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -51,5 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <button type="submit">Зарегистрироваться</button>
 </form>
+<form><button type="button" onclick="window.location='auth.php'">Уже есть аккаунт</button></form>
+
 </body>
 </html>

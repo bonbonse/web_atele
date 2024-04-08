@@ -3,6 +3,9 @@ session_start();
 
 require '../connect.php';
 
+if (isset($_SESSION['username']))
+    header("Location: ../index.php");
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -48,7 +51,7 @@ $conn->close();
 
     <button type="submit">Войти</button>
 </form>
-<form><button type="submit" onclick="window.location='registr.php'">Регистрация</button></form> // TODO: доделать
+<form><button type="button" onclick="window.location='registr.php'">Регистрация</button></form>
 
 </body>
 </html>
