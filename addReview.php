@@ -58,12 +58,7 @@ if ($res->num_rows > 0) {
 
     echo "<form class='form' method='post' action='addReview.php'>
         Отзыв: <input type='text' name='message'><br>
-        Пользователь: <select name='user'><br>";
-        while ($row = $res->fetch_assoc()) {
-            echo "<option value='" . $row['id_user'] . "'>".$row['surname'] . "</option>";
-        }
-        echo "</select></td></tr>
-    <input type='submit' value='Отправить'>
+        <input type='submit' value='Отправить'>
     </form>";
 
     ?>
@@ -73,13 +68,12 @@ if ($res->num_rows > 0) {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $message = $_POST['message'];
         $date = date("d.m.y");
-        $user = $_POST['user'];
+        $user = $_SESSION['id_user'];
         $user_order = 1;
 
         $sql = "INSERT INTO Reviews (message, date_review, user, order_r) VALUES ('$message', '$date', '$user', '$user_order')";
-        echo $sql;
         if ($conn->query($sql) === TRUE) {
-            echo "Добавлено";
+            header('Location: addReview.php');
         } else {
             echo "Ошибка: " . $sql . "<br>" . $conn->error;
         }
@@ -92,9 +86,3 @@ if ($res->num_rows > 0) {
 
 </body>
 </html>
-
-// Стиль таблицы, нав. панель +
-// Фильтр по типу/виду +
-// Поправить сортировку -
-// удаление, обновление, добавление
-// на одной странице

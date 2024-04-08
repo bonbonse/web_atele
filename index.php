@@ -13,7 +13,7 @@ require 'Door/authSessionCheck.php';
 <body class="body">
 <button class="button" onclick="window.location.href='index.php'">Главная</button>
 <button class="button" onclick="window.location.href='addReview.php'">Оставить отзыв</button>
-<button class="button" onclick="window.location.href='addReview.php'">Корзина</button>
+<button class="button" onclick="window.location.href='profile.php'">Профиль</button>
 <button class="button" onclick="window.location.href='addReview.php'">Акции</button>
 <button class="button" onclick="window.location.href='addReview.php'">Ткани</button>
 <button class="button" onclick="window.location.href='addReview.php'">Подарки</button>
@@ -68,14 +68,17 @@ $result = $conn->query($service);
 <div id="main">
     <h2>Услуги</h2>
     <?php
+    $butService = "window.location=`service.php?id_service=";
+
     if ($result->num_rows > 0) {
         echo "<table class='table''>";
         echo "<tr><th>Код Услуги</th><th>Дополнительная информация</th><th>Тип услуги</th>
                 <th>Вид услуги</th><th>Фото</th>";
         while ($row = $result->fetch_assoc()) {
-            echo "<tr><td>".$row['id_service']."</td><td>".$row['info']."</td>
+            $butService_s = $butService . $row['id_service'] . "`";
+            echo "<tr onclick='" . $butService_s . "'><td>".$row['id_service']."</td><td>".$row['info']."</td>
             <td>".$row['type_name']."</td><td>".$row['kind_name']."</td>
-            <td><img src='https://s14.stc.all.kpcdn.net/woman/wp-content/uploads/2022/06/s-vysokoj-posadkoj-massimodutti.com_.jpeg'/></td>";
+            <td><img src='https://s14.stc.all.kpcdn.net/woman/wp-content/uploads/2022/06/s-vysokoj-posadkoj-massimodutti.com_.jpeg'/></td></tr>";
         }
         echo "</table>";
         echo $group_filter_value;
@@ -92,23 +95,5 @@ $result = $conn->query($service);
 <?php
 $conn->close();
 ?>
-
-<script>
-    let update = () =>{
-        var selectedValue = document.getElementById("group_filter").value;
-
-        // Отправляем AJAX запрос на сервер для получения новых данных
-        var xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-                // Обновляем содержимое контейнера с данными
-                document.getElementById("table").innerHTML = xhr.responseText;
-            }
-        };
-
-        xhr.open("GET", "новые_данные.php?value=" + selectedValue, true);
-        xhr.send();
-    }
-</script>
 </body>
 </html>

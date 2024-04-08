@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $row = $result->fetch_assoc();
         if ($row['password'] == $_POST['password']) {
             $_SESSION['username'] = $row['login'];
+            $_SESSION['id_user'] = $row['id_user'];
             header('Location: ../index.php');
         } else {
             echo 'Неверный логин или пароль';
