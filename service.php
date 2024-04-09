@@ -10,14 +10,13 @@ require 'Door/authSessionCheck.php';
     <title>Ателе</title>
 </head>
 <body class="body">
-<button class="button" onclick="window.location.href='index.php'">Главная</button>
-<button class="button" onclick="window.location.href='addReview.php'">Оставить отзыв</button>
-<button class="button" onclick="window.location.href='profile.php'">Профиль</button>
-<button class="button" onclick="window.location.href='addReview.php'">Акции</button>
-<button class="button" onclick="window.location.href='addReview.php'">Ткани</button>
-<button class="button" onclick="window.location.href='addReview.php'">Подарки</button>
-<?php echo "<form method='post' action='Door/logout.php'><button class='button' type='submit'>Выйти</button></form>" ?>
+<div class="imgBack">
+    <button class="button" onclick="window.location.href='index.php'">Главная</button>
+    <button class="button" onclick="window.location.href='addReview.php'">Корзина</button>
+    <button class="button" onclick="window.location.href='addReview.php'">Контакты</button>
 
+    <button class="button" onclick="window.location.href='profile.php'">Профиль</button>
+</div>
 
 <?php
 $id_service = $_GET['id_service'];
@@ -29,11 +28,6 @@ $sql_str = "SELECT services.id_service, services.info, types.type_name, kinds.ki
 
 $service = $conn->query($sql_str);
 $service = $service->fetch_assoc();
-
-echo $service['info'];
-echo $service['type_name'];
-echo $service['kind_name'];
-
 
 echo '<form method="post" action="process_order.php">
     

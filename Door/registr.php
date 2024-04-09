@@ -33,10 +33,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../index.css">
     <title>Регистрация пользователя</title>
 </head>
 <body>
-<h1>Регистрация</h1>
+<h1 class="center">Регистрация</h1>
 <form method="POST" action="">
     <label for="surname">Фамилия:</label>
     <input type="text" id="surname" name="surname" required><br><br>
@@ -51,8 +52,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <input type="password" id="password" name="password" required><br><br>
 
     <button type="submit">Зарегистрироваться</button>
+    <form><button type="button" onclick="window.location='auth.php'">Уже есть аккаунт</button></form>
+
 </form>
-<form><button type="button" onclick="window.location='auth.php'">Уже есть аккаунт</button></form>
 
 </body>
 </html>

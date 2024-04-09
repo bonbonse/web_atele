@@ -1,10 +1,12 @@
 /* Стили для кнопок */
 
-.body {
-    max-width: 1000px;
+body {
+    max-width: 800px;
     margin: 20px auto;
+    text-align: center;
+    background: #cccccc;
 }
-.button {
+button {
     display: inline-block;
     padding: 10px 20px;
     margin: 15px;
@@ -15,39 +17,53 @@
     border-radius: 5px;
     cursor: pointer;
 }
+.buttonExit {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 15px;
+    background-color: #3498db;
+    color: white;
+    text-align: right;
+    text-decoration: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
-.button:hover {
+button:hover {
     background-color: #2980b9;
 }
 
 /* Стили для таблицы или формы */
-.table {
+table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-.table th, .table td {
+table th, .table td {
     border: 1px solid #ccc;
     padding: 8px;
 }
 
-.table th {
+table th {
     background-color: #f2f2f2;
 }
 
-.table tr:nth-child(even) {
-    background-color: #f9f9f9;
+table tr:nth-child(even) {
+    background-color: #ffffff;
 }
-.form {
+table tr:nth-child(odd) {
+    background-color: #eeeeee;
+}
+form {
     width: 100%;
-    max-width: 400px;
+    max-width: 600px;
     margin: 0 auto;
 }
 
-.form input[type="text"],
-.form input[type="email"],
-.form textarea {
+form input[type="text"],
+form input[type="email"],
+form textarea {
     width: 100%;
     padding: 10px;
     margin: 5px 0;
@@ -55,24 +71,25 @@
     border-radius: 5px;
 }
 
-.form input[type="submit"] {
+form input[type="submit"] {
     background-color: #3498db;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 5px;
 }
 
-.form input[type="submit"]:hover {
+form input[type="submit"]:hover {
     background-color: #2980b9;
 }
 
-.form label {
+form label {
     font-weight: bold;
 }
 
-.form .error {
+form .error {
     color: red;
 }
 
@@ -98,13 +115,38 @@ input[type="date"]::-webkit-inner-spin-button {
 input[type="date"]::-webkit-clear-button {
     display: none;
 }
-
+input[type="submit"] {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
 img {
     max-width: 100px; /* Максимальная ширина картинки */
     max-height: 100px; /* Максимальная высота картинки */
     display: block;
     margin: 0 auto; /* Центрирование картинки */
 }
+
 .delete {
     margin: 15px;
+}
+.center{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.mainImg {
+    max-width: 500px; /* Максимальная ширина картинки */
+    max-height: 500px; /* Максимальная высота картинки */
+    display: block;
+    margin: 0 auto; /* Центрирование картинки */
+}
+.imgBack{
+    height: 400px;
+    width: 800px;
+    background-image: url("https://www.malls.ru/upload/iblock/58c/hm_the_core.jpg");
+    margin-bottom: 50px;
 }

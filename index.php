@@ -1,6 +1,5 @@
 <?php
 include 'connect.php';
-require 'Door/authSessionCheck.php';
 ?>
 
 <!DOCTYPE html>
@@ -10,25 +9,32 @@ require 'Door/authSessionCheck.php';
     <link rel="stylesheet" href="index.css">
     <title>Ателе</title>
 </head>
-<body class="body">
+<body class="center">
+<div class="imgBack">
 <button class="button" onclick="window.location.href='index.php'">Главная</button>
-<button class="button" onclick="window.location.href='addReview.php'">Оставить отзыв</button>
+<button class="button" onclick="window.location.href='addReview.php'">Корзина</button>
+<button class="button" onclick="window.location.href='addReview.php'">Контакты</button>
+
 <button class="button" onclick="window.location.href='profile.php'">Профиль</button>
-<button class="button" onclick="window.location.href='addReview.php'">Акции</button>
-<button class="button" onclick="window.location.href='addReview.php'">Ткани</button>
-<button class="button" onclick="window.location.href='addReview.php'">Подарки</button>
-<?php echo "<form method='post' action='Door/logout.php'><button class='button' type='submit'>Выйти</button></form>" ?>
+</div>
+<h2>Услуги</h2>
 
 <form method="get" class="form">
-    <label for="column_sort">Сортировать по:</label>
+    <a>
+        <label for="column_sort">Сортировать по:</label>
+    </a>
     <select id='column_sort' name="column_sort">
         <option value="id_service">Коду</option>
         <option value="comment">Доп.информации</option>
         <option value="type_name">Типу</option>
         <option value="kind">Виду</option>
     </select>
+    <a>
     <label for="group_filter">Искать только:</label>
+    </a>
     <?php
+
+
     $base_url_str = "window.location='index.php?group_filter='";
     $group_filter_value = isset($_GET['group_filter']) ? $_GET['group_filter'] : '';
     ?>
@@ -47,7 +53,7 @@ require 'Door/authSessionCheck.php';
             $isFiltered = $_GET['group_filter'] == "none" ? false : true;
             ?>
     </select>
-    <input type="submit" class="button" value="Сбросить все сортировки и фильтры">
+    <input type="submit" class="button" value="Сбросить фильтры">
 </form>
 
 <?php
@@ -66,7 +72,6 @@ $result = $conn->query($service);
 ?>
 
 <div id="main">
-    <h2>Услуги</h2>
     <?php
     $butService = "window.location=`service.php?id_service=";
 
@@ -81,7 +86,6 @@ $result = $conn->query($service);
             <td><img src='https://s14.stc.all.kpcdn.net/woman/wp-content/uploads/2022/06/s-vysokoj-posadkoj-massimodutti.com_.jpeg'/></td></tr>";
         }
         echo "</table>";
-        echo $group_filter_value;
     } else {
         echo "Нет услуг";
     }

@@ -40,19 +40,20 @@ $conn->close();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Авторизация пользователя</title>
+    <link rel="stylesheet" href="../index.css">
 </head>
 <body>
-<h1>Авторизация</h1>
-<form method="POST" action="">
-    <label for="username">Логин:</label>
-    <input type="text" id="username" name="username" required><br><br>
+<h1 class="center">Авторизация</h1>
+<form method="POST" action="" class="center">
+    <label for="username"></label>
+    <input type="text" id="username" name="username" placeholder="Login" required><br><br>
 
-    <label for="password">Пароль:</label>
-    <input type="password" id="password" name="password" required><br><br>
+    <label for="password"></label>
+    <input type="password" id="password" name="password" placeholder="Password" required><br><br>
 
     <button type="submit">Войти</button>
+    <form><button type="button" onclick="window.location='registr.php'">Регистрация</button></form>
 </form>
-<form><button type="button" onclick="window.location='registr.php'">Регистрация</button></form>
 
 </body>
 </html>
