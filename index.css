@@ -1,10 +1,8 @@
-/* Стили для кнопок */
-
 body {
     max-width: 800px;
     margin: 20px auto;
     text-align: center;
-    background: #cccccc;
+    background: #fdecec;
 }
 button {
     display: inline-block;

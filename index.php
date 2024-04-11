@@ -12,7 +12,7 @@ include 'connect.php';
 <body class="center">
 <div class="imgBack">
 <button class="button" onclick="window.location.href='index.php'">Главная</button>
-<button class="button" onclick="window.location.href='addReview.php'">Корзина</button>
+<button class="button" onclick="window.location.href='box.php'">Корзина</button>
 <button class="button" onclick="window.location.href='addReview.php'">Контакты</button>
 
 <button class="button" onclick="window.location.href='profile.php'">Профиль</button>
@@ -23,7 +23,7 @@ include 'connect.php';
     <a>
         <label for="column_sort">Сортировать по:</label>
     </a>
-    <select id='column_sort' name="column_sort">
+    <select id='column_sort' name="column_sort" onchange="window.location='index.php?column_sort='+this.value +'&group_filter=<?php echo $_GET['group_filter']?>'">
         <option value="id_service">Коду</option>
         <option value="comment">Доп.информации</option>
         <option value="type_name">Типу</option>
