@@ -2,7 +2,7 @@ body {
     max-width: 800px;
     margin: 20px auto;
     text-align: center;
-    background: #fdecec;
+    background: #ffffff;
 }
 button {
     display: inline-block;
@@ -57,6 +57,11 @@ form {
     width: 100%;
     max-width: 600px;
     margin: 0 auto;
+}
+table td img{
+    margin-top: 5px;
+    width: 20px;
+    height: 20px;
 }
 
 form input[type="text"],
@@ -147,4 +152,14 @@ img {
     width: 800px;
     background-image: url("https://www.malls.ru/upload/iblock/58c/hm_the_core.jpg");
     margin-bottom: 50px;
+}
+.mainButtons{
+    display: inline-block;;
+}
+
+.contacts {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background-color: #242424;
 }

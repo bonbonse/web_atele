@@ -30,8 +30,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-
-
 ?>
 
 <!DOCTYPE html>
@@ -40,27 +38,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <link rel="stylesheet" href="index.css">
     <title>Корзина</title>
-    <style>
-        body {
-            text-align: center;
-        }
-        form {
-            display: inline-block;
-            margin-top: 20px;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-    </style>
 </head>
 <body>
 
-<button class="button" onclick="window.location.href='index.php'">Главная</button>
-<button class="button" onclick="window.location.href='box.php'">Корзина</button>
-<button class="button" onclick="window.location.href='addReview.php'">Контакты</button>
-
-<button class="button" onclick="window.location.href='profile.php'">Профиль</button>
+<div class="imgBack">
+    <div class="mainButtons"><button class="button" onclick="window.location.href='index.php'">Главная</button></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='box.php'">Корзина</button></div>
+    <div class="mainButtons"><img src="resources/logo.png"></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='contacts.php'">Контакты</button></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='profile.php'">Профиль</button></div>
+</div>
 
 <h1>Корзина</h1>
 <ul>
@@ -70,9 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <?php
 // Данные приходят с таблицы М:М
-//
 $id_user = $_SESSION['id_user'];
-$sql_str = "SELECT services.id_service, services.info, types.type_name, kinds.kind_name FROM box 
+$sql_str = "SELECT box.id_box, services.id_service, services.info, types.type_name, kinds.kind_name, services.price FROM box 
             JOIN services ON services.id_service = box.id_service
             JOIN types ON services.type = types.id_type
             JOIN kinds ON services.kind = kinds.id_kind
@@ -80,12 +66,18 @@ $sql_str = "SELECT services.id_service, services.info, types.type_name, kinds.ki
 
 $res = $conn->query($sql_str);
 
+echo "<table class='table'>
+        <tr><th>Информация</th><th>Тип</th><th>Вид одежды</th><th>Цена</th><th>Удалить</th></tr>";
+$prices = 0;
 while ($row = $res->fetch_assoc()) {
-    echo "<table class='table'>
-        <tr><th>Информация</th><th>Тип</th><th>Вид одежды</th></tr>
-        <tr><td>'". $row["info"] . "</td><td>". $row["type_name"] . "</td><td>". $row["kind_name"] ."</td></tr>
-    </table>";
+        echo "<tr><td>'". $row["info"] . "</td><td>". $row["type_name"] . "</td><td>"
+            . $row["kind_name"] ."</td><td>". $row["price"] ."</td><td><img src='resources/png-transparent-trash-dump-recycling-recycle-thumbnail.png'></td></tr>";
+        $prices += $row['price'];
 }
+
+echo "</table>";
+
+echo "<div>Общая сумма: ". $prices ."</div>";
 
 echo "<form method='post'>
     <input type='text' name='comment' placeholder='Оставьте комментарий к заказу' />

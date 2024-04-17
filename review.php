@@ -10,10 +10,13 @@ include 'connect.php';
     <title>Ателе</title>
 </head>
 <body>
-<button class="button" onclick="window.location.href='index.php'">Главная</button>
-<button class="button" onclick="window.location.href='изменение.php'">Изменение</button>
-<button class="button" onclick="window.location.href='addReview.php'">Добавление</button>
-<button class="button" onclick="window.location.href='фильтр.php'">Фильтр</button>
+<div class="imgBack">
+    <div class="mainButtons"><button class="button" onclick="window.location.href='index.php'">Главная</button></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='box.php'">Корзина</button></div>
+    <div class="mainButtons"><img src="resources/logo.png"></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='contacts.php'">Контакты</button></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='profile.php'">Профиль</button></div>
+</div>
 
 
 <form method="get">

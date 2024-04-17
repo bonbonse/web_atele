@@ -23,9 +23,19 @@ $conn->close();
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="index.css">
     <title>Изменить данные пользователя</title>
 </head>
 <body>
+
+<div class="imgBack">
+    <div class="mainButtons"><button class="button" onclick="window.location.href='index.php'">Главная</button></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='box.php'">Корзина</button></div>
+    <div class="mainButtons"><img src="resources/logo.png"></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='contacts.php'">Контакты</button></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='profile.php'">Профиль</button></div>
+</div>
+
 <h2>Изменить данные пользователя:</h2>
 <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="post">
     Новое имя: <input type="text" name="new_name" placeholder="Введите новое имя"><br>

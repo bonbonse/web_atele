@@ -11,11 +11,11 @@ include 'connect.php';
 </head>
 <body class="center">
 <div class="imgBack">
-<button class="button" onclick="window.location.href='index.php'">Главная</button>
-<button class="button" onclick="window.location.href='box.php'">Корзина</button>
-<button class="button" onclick="window.location.href='addReview.php'">Контакты</button>
-
-<button class="button" onclick="window.location.href='profile.php'">Профиль</button>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='index.php'">Главная</button></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='box.php'">Корзина</button></div>
+    <div class="mainButtons"><img src="resources/logo.png"></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='contacts.php'">Контакты</button></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='profile.php'">Профиль</button></div>
 </div>
 <h2>Услуги</h2>
 
@@ -77,11 +77,11 @@ $result = $conn->query($service);
 
     if ($result->num_rows > 0) {
         echo "<table class='table''>";
-        echo "<tr><th>Код Услуги</th><th>Дополнительная информация</th><th>Тип услуги</th>
+        echo "<tr><th>Описание</th><th>Тип услуги</th>
                 <th>Вид услуги</th><th>Фото</th>";
         while ($row = $result->fetch_assoc()) {
             $butService_s = $butService . $row['id_service'] . "`";
-            echo "<tr onclick='" . $butService_s . "'><td>".$row['id_service']."</td><td>".$row['info']."</td>
+            echo "<tr onclick='" . $butService_s . "'></td><td>".$row['info']."</td>
             <td>".$row['type_name']."</td><td>".$row['kind_name']."</td>
             <td><img src='https://s14.stc.all.kpcdn.net/woman/wp-content/uploads/2022/06/s-vysokoj-posadkoj-massimodutti.com_.jpeg'/></td></tr>";
         }

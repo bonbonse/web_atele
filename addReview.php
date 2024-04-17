@@ -15,11 +15,11 @@ date_default_timezone_set('UTC');
 </head>
 <body class="body">
 <div class="imgBack">
-    <button class="button" onclick="window.location.href='index.php'">Главная</button>
-    <button class="button" onclick="window.location.href='addReview.php'">Корзина</button>
-    <button class="button" onclick="window.location.href='addReview.php'">Контакты</button>
-
-    <button class="button" onclick="window.location.href='profile.php'">Профиль</button>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='index.php'">Главная</button></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='box.php'">Корзина</button></div>
+    <div class="mainButtons"><img src="resources/logo.png"></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='contacts.php'">Контакты</button></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='profile.php'">Профиль</button></div>
 </div>
 
 <h2>Отзывы:</h2>
@@ -32,16 +32,11 @@ $sql_str = "SELECT reviews.id_review, reviews.message, users.surname
                 WHERE reviews.order_r = $id_order";
 $res = $conn->query($sql_str);
 
-function delete_review(){
-    echo "hi";
-}
-
 if ($res->num_rows > 0) {
     echo "<table class='table'>";
-    echo "<tr><th>Код отзыва</th><th>Отзыв</th><th>Код пользователя</th></tr>";
+    echo "<tr><th>Отзыв</th><th>Код пользователя</th></tr>";
     while ($row = $res->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . $row['id_review'] . "</td>";
         echo "<td>" . $row['message'] . "</td>";
         echo "<td>" . $row['surname'] . "<input type='submit' value='delete' class='delete' >" . "</td>";
         echo "</tr>";

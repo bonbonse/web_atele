@@ -28,13 +28,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 <body class="body">
 <div class="imgBack">
-    <button class="button" onclick="window.location.href='index.php'">Главная</button>
-    <button class="button" onclick="window.location.href='addReview.php'">Корзина</button>
-    <button class="button" onclick="window.location.href='addReview.php'">Контакты</button>
-
-    <button class="button" onclick="window.location.href='profile.php'">Профиль</button>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='index.php'">Главная</button></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='box.php'">Корзина</button></div>
+    <div class="mainButtons"><img src="resources/logo.png"></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='contacts.php'">Контакты</button></div>
+    <div class="mainButtons"><button class="button" onclick="window.location.href='profile.php'">Профиль</button></div>
 </div>
-
 <?php
 $id_service = $_GET['id_service'];
 
